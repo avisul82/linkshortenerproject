@@ -1,6 +1,8 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { SignInButton, SignUpButton } from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const features = [
   {
@@ -63,15 +65,22 @@ export default async function Home() {
           them anywhere and watch your analytics grow.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 mt-2">
-          <SignUpButton>
-            <button className="rounded-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-3 text-base transition-colors cursor-pointer">
+          <SignUpButton mode="modal">
+            <Button
+              size="lg"
+              className="rounded-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8"
+            >
               Get started for free
-            </button>
+            </Button>
           </SignUpButton>
-          <SignInButton>
-            <button className="rounded-full border border-zinc-300 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 font-semibold px-8 py-3 text-base transition-colors cursor-pointer">
+          <SignInButton mode="modal">
+            <Button
+              variant="outline"
+              size="lg"
+              className="rounded-full font-semibold px-8"
+            >
               Sign in
-            </button>
+            </Button>
           </SignInButton>
         </div>
       </section>
@@ -96,16 +105,17 @@ export default async function Home() {
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((f) => (
-            <div
-              key={f.title}
-              className="flex flex-col gap-3 rounded-2xl border border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 p-6 hover:shadow-md transition-shadow"
-            >
-              <span className="text-3xl">{f.icon}</span>
-              <h3 className="font-semibold text-lg">{f.title}</h3>
-              <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
-                {f.description}
-              </p>
-            </div>
+            <Card key={f.title} className="hover:shadow-md transition-shadow">
+              <CardHeader>
+                <span className="text-3xl">{f.icon}</span>
+                <CardTitle className="text-lg">{f.title}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                  {f.description}
+                </p>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </section>
@@ -118,10 +128,13 @@ export default async function Home() {
         <p className="text-indigo-100 max-w-md">
           Join thousands of users who share smarter links every day.
         </p>
-        <SignUpButton>
-          <button className="rounded-full bg-white text-indigo-600 font-semibold px-8 py-3 text-base hover:bg-indigo-50 transition-colors cursor-pointer">
+        <SignUpButton mode="modal">
+          <Button
+            size="lg"
+            className="rounded-full bg-white text-indigo-600 font-semibold px-8 hover:bg-indigo-50"
+          >
             Create your free account
-          </button>
+          </Button>
         </SignUpButton>
       </section>
 
